@@ -1,5 +1,5 @@
 # DeepLearning
-My Projects on CNN, Sequence Models, Quantum Inspired Neural Networks and Deep Neural Network.
+
 
 I have worked on the following Projects :
 
@@ -10,7 +10,6 @@ In Convolutional Neural Network :
 4. Residual_Networks(ResNet50_Implementation)
 5. Face_Recognition_System
 6. Autonomous_Driving_Car_Detection
-
 
 In Sequence Models :
 1. Improvize_Jazz_Solo_using_LSTM
