@@ -23,6 +23,9 @@ import tensorflow as tf
 from fr_utils import *
 from inception_blocks_v2 import *
 
+get_ipython().magic('matplotlib inline')
+get_ipython().magic('load_ext autoreload')
+get_ipython().magic('autoreload 2')
 
 def triplet_loss(y_true, y_pred, alpha = 0.2):
     """
@@ -35,12 +38,7 @@ def triplet_loss(y_true, y_pred, alpha = 0.2):
    
     loss = tf.reduce_sum(tf.maximum(basic_loss,0.0))
    
-    
     return loss
-
-
-# Now, when someone shows up at your front door and swipes their ID card (thus giving you their name), you can look up their encoding in the database, and use it to check if the person standing at the front door matches the name on the ID.
-# verify
 
 def verify(image_path, identity, database, model):
     """
@@ -51,7 +49,6 @@ def verify(image_path, identity, database, model):
     
     # Compute distance with identity's image 
     dist = np.linalg.norm(encoding-database[identity])
-    
     # Open the door if dist < 0.7, else don't open 
     if dist<0.7:
         print("It's " + str(identity) + ", welcome home!")
@@ -89,17 +86,8 @@ def who_is_it(image_path, database, model):
     return min_dist, identity
 
 
-
 if __name__ == '__main__':
     np.set_printoptions(threshold=np.nan)
-
-    get_ipython().magic('matplotlib inline')
-    get_ipython().magic('load_ext autoreload')
-    get_ipython().magic('autoreload 2')
-
-
-    # ## 0 - Naive Face Verification
-
     FRmodel = faceRecoModel(input_shape=(3, 96, 96))
 
     print("Total Params:", FRmodel.count_params())
@@ -133,15 +121,6 @@ if __name__ == '__main__':
     database["benoit"] = img_to_encoding("images/benoit.jpg", FRmodel)
     database["arnaud"] = img_to_encoding("images/arnaud.jpg", FRmodel)
 
-    # Younes is trying to enter the Happy House and the camera takes a picture of him ("images/camera_0.jpg"). Let's run your verification algorithm on this picture:
-    # 
-    # <img src="images/camera_0.jpg" style="width:100px;height:100px;">
-
-    # Younes is at the front-door and the camera takes a picture of him ("images/camera_0.jpg"). Let's see if your who_it_is() algorithm identifies Younes. 
-
     verify("images/camera_0.jpg", "younes", database, FRmodel)
-
     verify("images/camera_2.jpg", "kian", database, FRmodel)
-
-
     who_is_it("images/camera_0.jpg", database, FRmodel)

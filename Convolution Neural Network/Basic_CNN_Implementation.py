@@ -17,20 +17,12 @@ get_ipython().magic('load_ext autoreload')
 get_ipython().magic('autoreload 2')
 
 np.random.seed(1)
-
-
-
 def zero_pad(X, pad):
     """
     Pad with zeros all images of the dataset X. The padding is applied to the height and width of an image, 
     """
     X_pad = np.pad(X, ((0,0), (pad,pad), (pad,pad), (0,0)), 'constant')
-    
-    
     return X_pad
-
-
-
 
 def conv_single_step(a_slice_prev, W, b):
     """
@@ -45,8 +37,6 @@ def conv_single_step(a_slice_prev, W, b):
     Z = Z+float(b)
 
     return Z
-
-
 
 def conv_forward(A_prev, W, b, hparameters):
     """
@@ -100,8 +90,6 @@ def conv_forward(A_prev, W, b, hparameters):
     
     return Z, cache
 
-
-
 def pool_forward(A_prev, hparameters, mode = "max"):
     """
     Implements the forward pass of the pooling layer
@@ -143,8 +131,6 @@ def pool_forward(A_prev, hparameters, mode = "max"):
                     elif mode == "average":
                         A[i, h, w, c] = np.mean(a_prev_slice)
     
-    
-    
     # Store the input and hparameters in "cache" for pool_backward()
     cache = (A_prev, hparameters)
     
@@ -153,14 +139,10 @@ def pool_forward(A_prev, hparameters, mode = "max"):
     
     return A, cache
 
-
-
 def conv_backward(dZ, cache):
     """
     Implement the backward propagation for a convolution function
     """
-    
-   
     # Retrieve information from "cache"
     (A_prev, W, b, hparameters) = cache
     
@@ -245,8 +227,6 @@ def distribute_value(dz, shape):
     
     return a
 
-
-
 def pool_backward(dA, cache, mode = "max"):
     """
     Implements the backward pass of the pooling layer
@@ -299,7 +279,6 @@ def pool_backward(dA, cache, mode = "max"):
                         # Distribute it to get the correct slice of dA_prev. i.e. Add the distributed value of da. 
                         dA_prev[i, vert_start: vert_end, horiz_start: horiz_end, c] += distribute_value(da,shape)
                         
-
     
     # Making sure your output shape is correct
     assert(dA_prev.shape == A_prev.shape)
@@ -309,8 +288,7 @@ def pool_backward(dA, cache, mode = "max"):
 
 
 if __name__ == '__main__':
-
-    # In[5]:
+    # Testing zero_pad
     np.random.seed(1)
     x = np.random.randn(4, 3, 3, 2)
     x_pad = zero_pad(x, 2)
@@ -324,82 +302,55 @@ if __name__ == '__main__':
     axarr[0].imshow(x[0,:,:,0])
     axarr[1].set_title('x_pad')
     axarr[1].imshow(x_pad[0,:,:,0])
-
-
-    # In[7]:
-
-    np.random.seed(1)
-    a_slice_prev = np.random.randn(4, 4, 3)
-    W = np.random.randn(4, 4, 3)
-    b = np.random.randn(1, 1, 1)
-
-    Z = conv_single_step(a_slice_prev, W, b)
+    a_slice_prev_1 = np.random.randn(4, 4, 3)
+    W_1 = np.random.randn(4, 4, 3)
+    b_1 = np.random.randn(1, 1, 1)
+    Z_1 = conv_single_step(a_slice_prev_1, W_1, b_1)
     print("Z =", Z)
-
-
-    # In[9]:
-
-    np.random.seed(1)
-    A_prev = np.random.randn(10,4,4,3)
-    W = np.random.randn(2,2,3,8)
-    b = np.random.randn(1,1,1,8)
-    hparameters = {"pad" : 2,
+    # In
+    A_prev_2 = np.random.randn(10,4,4,3)
+    W_2 = np.random.randn(2,2,3,8)
+    b_2 = np.random.randn(1,1,1,8)
+    hparameters_2 = {"pad" : 2,
                    "stride": 2}
-
-    Z, cache_conv = conv_forward(A_prev, W, b, hparameters)
+    Z_2, cache_conv_2 = conv_forward(A_prev_2, W_2, b_2, hparameters_2)
     print("Z's mean =", np.mean(Z))
     print("Z[3,2,1] =", Z[3,2,1])
     print("cache_conv[0][1][2][3] =", cache_conv[0][1][2][3])
-
-    # In[11]:
-
-    np.random.seed(1)
-    A_prev = np.random.randn(2, 4, 4, 3)
-    hparameters = {"stride" : 2, "f": 3}
-
-    A, cache = pool_forward(A_prev, hparameters)
+    # In
+    A_prev_3 = np.random.randn(2, 4, 4, 3)
+    hparameters_3 = {"stride" : 2, "f": 3}
+    A_3, cache_3 = pool_forward(A_prev_3, hparameters_3)
     print("mode = max")
     print("A =", A)
     print()
-    A, cache = pool_forward(A_prev, hparameters, mode = "average")
+    A_3, cache_3 = pool_forward(A_prev_3, hparameters_3, mode = "average")
     print("mode = average")
     print("A =", A)
-
-
     # In[25]:
-
-    np.random.seed(1)
-    dA, dW, db = conv_backward(Z, cache_conv)
+    dA, dW, db = conv_backward(Z_2, cache_conv_2)
     print("dA_mean =", np.mean(dA))
     print("dW_mean =", np.mean(dW))
     print("db_mean =", np.mean(db))
-
-
     # In[27]:
-
-    np.random.seed(1)
-    x = np.random.randn(2,3)
-    mask = create_mask_from_window(x)
-    print('x = ', x)
-    print("mask = ", mask)
-    # In[29]:
-
+    x_4 = np.random.randn(2,3)
+    mask_4 = create_mask_from_window(x_4)
+    print('x = ', x_4)
+    print("mask = ", mask_4)
+   
+    # In
     a = distribute_value(2, (2,2))
     print('distributed value =', a)
-
-    np.random.seed(1)
-    A_prev = np.random.randn(5, 5, 3, 2)
-    hparameters = {"stride" : 1, "f": 2}
-    A, cache = pool_forward(A_prev, hparameters)
-    dA = np.random.randn(5, 4, 2, 2)
-
-    dA_prev = pool_backward(dA, cache, mode = "max")
+    A_prev_5 = np.random.randn(5, 5, 3, 2)
+    hparameters_5  = {"stride" : 1, "f": 2}
+    A_5 , cache_5  = pool_forward(A_prev_5 , hparameters_5 )
+    dA_5  = np.random.randn(5, 4, 2, 2)
+    dA_prev_5  = pool_backward(dA_5 , cache_5 , mode = "max")
     print("mode = max")
-    print('mean of dA = ', np.mean(dA))
-    print('dA_prev[1,1] = ', dA_prev[1,1])  
+    print('mean of dA = ', np.mean(dA_5 ))
+    print('dA_prev[1,1] = ', dA_prev_5 [1,1])  
     print()
-    dA_prev = pool_backward(dA, cache, mode = "average")
+    dA_prev_5  = pool_backward(dA_5 , cache_5 , mode = "average")
     print("mode = average")
-    print('mean of dA = ', np.mean(dA))
-    print('dA_prev[1,1] = ', dA_prev[1,1]) 
-
+    print('mean of dA = ', np.mean(dA_5 ))
+    print('dA_prev[1,1] = ', dA_prev[1,1])

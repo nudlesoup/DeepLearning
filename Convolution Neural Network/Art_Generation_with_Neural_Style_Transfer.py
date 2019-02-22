@@ -23,18 +23,14 @@ def compute_content_cost(a_C, a_G):
     """
     # Retrieve dimensions from a_G 
     m, n_H, n_W, n_C = a_G.get_shape().as_list()
-    
     # Reshape a_C and a_G 
     a_C_unrolled = tf.reshape(tf.transpose(a_C, perm = [0, 3, 1, 2]),[1,n_C,n_W*n_H])
     a_G_unrolled = tf.reshape(tf.transpose(a_G, perm = [0, 3, 1, 2]),[1,n_C,n_W*n_H])
-    
     # compute the cost with tensorflow 
     J_content = (1.0/(4.0*n_H*n_W*n_C))*tf.reduce_sum(tf.square(a_C_unrolled-a_G_unrolled))
-   
     return J_content
 
 #  gram_matrix
-
 def gram_matrix(A):
     """
     Argument:
@@ -44,31 +40,22 @@ def gram_matrix(A):
     return GA
 
 # compute_layer_style_cost
-
 def compute_layer_style_cost(a_S, a_G):
-
     m, n_H, n_W, n_C = a_G.get_shape().as_list()
-    
     # Reshape the images to have them of shape (n_C, n_H*n_W) 
     a_S = tf.reshape(tf.transpose(a_S, perm = [0, 3, 1, 2]),[n_C,n_H*n_W])
     a_G = tf.reshape(tf.transpose(a_G, perm = [0, 3, 1, 2]),[n_C,n_H*n_W])
-
     # Computing gram_matrices for both images S and G 
     GS = gram_matrix(a_S)
     GG = gram_matrix(a_G)
-
     # Computing the loss 
     J_style_layer = (1.0/(4.0* n_C**2 * (n_H*n_W)**2 )) * (tf.reduce_sum(tf.square(GG-GS)))
-    
-    
     return J_style_layer
-
 
 def compute_style_cost(model, STYLE_LAYERS):
     """
     Computes the overall style cost from several chosen layers
     """
-    
     # initialize the overall style cost
     J_style = 0
 
@@ -103,7 +90,6 @@ def total_cost(J_content, J_style, alpha = 10, beta = 40):
 
 
 def model_nn(sess, input_image, num_iterations = 200):
-    
     # Initialize global variables 
     sess.run(tf.global_variables_initializer())
     # Run the noisy input image (initial generated image)
@@ -134,8 +120,6 @@ def model_nn(sess, input_image, num_iterations = 200):
 
 
 if __name__ == '__main__':
-
-    
     model = load_vgg_model("pretrained-model/imagenet-vgg-verydeep-19.mat")
     print(model)
     content_image = scipy.misc.imread("images/louvre.jpg")
@@ -150,16 +134,14 @@ if __name__ == '__main__':
 
     style_image = scipy.misc.imread("images/monet_800600.jpg")
     imshow(style_image)
-
-
+    
     tf.reset_default_graph()
     with tf.Session() as test:
         tf.set_random_seed(1)
         A = tf.random_normal([3, 2*1], mean=1, stddev=4)
         GA = gram_matrix(A)
         print("GA = " + str(GA.eval()))
-
-
+    
     tf.reset_default_graph()
     with tf.Session() as test:
         tf.set_random_seed(1)
@@ -175,8 +157,6 @@ if __name__ == '__main__':
         ('conv3_1', 0.2),
         ('conv4_1', 0.2),
         ('conv5_1', 0.2)]
-
-
     tf.reset_default_graph()
     with tf.Session() as test:
         np.random.seed(3)
@@ -184,8 +164,6 @@ if __name__ == '__main__':
         J_style = np.random.randn()
         J = total_cost(J_content, J_style)
         print("J = " + str(J))
-
-
     # Reset the graph
     tf.reset_default_graph()
     sess = tf.InteractiveSession()
@@ -227,6 +205,3 @@ if __name__ == '__main__':
     # In[ ]:
 
     model_nn(sess, generated_image)
-
-
-
