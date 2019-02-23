@@ -1,4 +1,3 @@
-@Author:AmeyaDhamanaskar
 package qnn;
 
 
