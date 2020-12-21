@@ -1,7 +1,7 @@
 # DeepLearning
 
 I have worked on the following Projects :
-- 3DdetectionPrototype
+# 3DdetectionPrototype
 The Goal of this project: Detect and track 4 different objects includes vehicle, pedestrian, cyclist and traffic lights (labeled as 1, 2, 3, 20).   
 And I have done some things below:  
 
