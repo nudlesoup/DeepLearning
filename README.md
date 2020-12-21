@@ -1,6 +1,8 @@
 # DeepLearning
 
 I have worked on the following Projects :
+- 3DdetectionPrototype
+- ArtGenerationandDropout
 
 In Convolutional Neural Network
 1. Basic_CNN_Implementation
