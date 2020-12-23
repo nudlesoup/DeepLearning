@@ -10,15 +10,9 @@ And I have done some things below:  
 
  4.Optimize feedforward inference network and realize object detection and tracking in real time on camera     
 
-
-(In the future) Move the system to robots for avoiding obstacle   
-
-
 See demo below or see result in jupyter notebook's result       
 
 Yolo algorithm. There are 2 verson for it. [v1](https://arxiv.org/pdf/1506.02640.pdf), [v2](https://arxiv.org/pdf/1612.08242.pdf).  
-
-[Interperation video of my algorithm and codes](https://drive.google.com/file/d/1-v0i_KixemGHBmBk2lMOLATMamX6n-JC/view?usp=sharing)
 
 
 # Dependencies
@@ -28,11 +22,10 @@ Python,Mxnet 1.0, cuda8.0, tensorboardX,cudnn,opencv,GPU:nvidia 1070T
 # Yolo-v1  
 # Algorithm & Model Structure  
 Transform detection and classification problems in a regression problem  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/0.jpg)
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme/0.jpg)
  
 
-Data and Model
-https://drive.google.com/drive/u/0/folders/0BwXw1vJFiBDaZ1IwNjlEd0RZMFU     
+
 
 For asking training Dataset and testing Dataset, you could send me email.  
 In original dataset:  
@@ -62,36 +55,29 @@ vehicle : 0.84; Pedestrian : 0.07; Cyclist : 0.06; Traffic light : 0.03
 After about 24 hour's training(350 epoch),accuracy is about 0.99,precision is 0.85, recall is 0.98,h_diff is 1.3, w_diff is 1.23  
 The result is shown below:  
 
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/1.png)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/2.png)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/3.png)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/4.png)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/5.png)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/6.png)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/7.png)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/8.png)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/9.png)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme1.png)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme2.png)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme3.png)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme4.png)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme5.png)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme6.png)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme7.png)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme8.png)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readme9.png)  
 
 Demo for test data:  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/t1.jpg)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/t2.jpg)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/t3.jpg)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/t4.jpg)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/t5.jpg)  
-![image](https://github.com/YunchuZhang/Image-based-Object-Detection-System-for-Self-driving-Cars-Application/blob/master/readme/t6.jpg)
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readmet1.jpg)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readmet2.jpg)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readmet3.jpg)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readmet4.jpg)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readmet5.jpg)  
+![image](https://github.com/nudlesoup/DeepLearning/blob/master/3DdetectionPrototype/readmet6.jpg)
 
-
-Real-time test:  
-1.video data test: https://drive.google.com/open?id=1a9H8viB03dgJFk3aSzO0xqn8tFwSbmVm   
-2.real-time test on road:https://drive.google.com/file/d/1_T68yN0gDBtviDOgbKAwND5fq5EzwpI1/view?usp=sharing
-# Refer:
-
-http://blog.topspeedsnail.com/archives/2068
 
 https://www.pyimagesearch.com/2017/09/18/real-time-object-detection-with-deep-learning-and-opencv/
 # Yolo-v2
 Is writting and updating
-# Result
-Demo for test data:		
 
-Real-time test:		
+
+Code Credit : 
+https://github.com/YunchuZhang
